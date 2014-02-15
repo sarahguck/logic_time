@@ -1,0 +1,196 @@
+#left{
+	position:fixed;
+	left:0;
+	top:0;
+	z-index: 2;
+}
+#left h3{
+	margin-right:1em;
+}
+h3{
+	text-shadow: 2px 2px #ffffff;
+	background:#ddd;
+	padding:0 1em;
+	font-size: 1em;
+	line-height: 1em;
+	margin: 1em 0 0 0;
+	color:rgb(0, 0, 255);
+	height:1.2em;
+}
+#inputs{
+	position:fixed;
+	top:0;
+	left:25%;
+	width:40%;
+	list-style:none;
+	margin:0;
+	background:#ddd;
+	height:0;
+	overflow:hidden;
+	padding:0;
+	z-index:2;
+	background: url("dreamstime.jpg");
+	-webkit-transition:height .5s;
+  transition:height .5s;
+}
+#inputs.show{
+	height:100%;
+}
+.choice{
+	margin:0.2em auto;
+	background:#fff;
+	font-size:6em;
+	box-shadow:inset 0 0 1em 0 #000;
+	cursor:pointer;
+	padding: 0 .5em;
+}
+
+
+#rules{
+	list-style:none;
+	padding:0.5em 0.5em 0.5em 0;
+	margin:-0.2em 0 0 0;
+	position:relative;
+	width:19em;
+}
+/* .rule width 9.5em */
+/* .rule height 4.2em */
+.rule{
+	position:absolute;
+	background:#aaa;
+	background:#1DBF00;
+	background:#ffffff url('caddy.jpg') no-repeat 0 0;
+	background-size: 120% 120%;
+	color:#fff;
+	font-weight:bold;
+	width:7.5em;
+	height:2.2em;
+	margin:0.5em;
+	padding:0.5em;
+	text-align:right;
+	cursor:pointer;
+	-moz-box-shadow: 1em 1em 1em #000;
+	-webkit-box-shadow: 1em 1em 1em #000;
+	box-shadow: 1em 1em 1em #000;
+	text-shadow: 0px 1px 8px rgba(0, 0, 0, 1);
+}
+.rule:hover{
+	margin:.6em 0.5em 0.5em .6em;
+	-moz-box-shadow: 0.9 0.9 0.9 #000;
+	-webkit-box-shadow: 0.9 0.9 0.9 #000;
+	box-shadow: 0.9 0.9 0.9 #000;
+	-webkit-transition:margin .2s, box-shadow .2s;
+  transition:margin .2s, box-shadow .2s;
+}
+#rules li:nth-child(2n + 1){
+	left:0em;
+}
+#rules li:nth-child(2n){
+	left:9.5em;
+}
+#rules li:nth-child(1){
+	top:0;
+}
+#rules li:nth-child(2){
+	top:0;
+}
+#rules li:nth-child(3){
+	top:4.2em;
+}
+#rules li:nth-child(4){
+	top:4.2em;
+}
+#rules li:nth-child(5){
+	top:8.4em;
+}
+#rules li:nth-child(6){
+	top:8.4em;
+}
+#rules li:nth-child(7){
+	top:12.6em;
+}
+#rules li:nth-child(8){
+	top:12.6em;
+}
+#rules li:nth-child(9){
+	top:16.8em;
+}
+#rules li:nth-child(10){
+	top:16.8em;
+}
+
+.rule.push{
+	-webkit-animation: push .3s; /* Safari 4+ */
+  -moz-animation:    push .3s; /* Fx 5+ */
+  -o-animation:      push .3s; /* Opera 12+ */
+  animation:         push .3s; /* IE 10+ */
+}
+#implication_introduction{
+	position:absolute;
+	top: 20.75em;
+	left:-9.5em;
+}
+#implication_introduction.active{
+	left:0;
+	-webkit-transition:left .5s;
+  transition:left .5s;
+}
+
+
+
+@-webkit-keyframes push {
+	0%, 100% {
+		margin:0.5em;
+		-moz-box-shadow: 1em 1em 1em #000;
+		-webkit-box-shadow: 1em 1em 1em #000;
+		box-shadow: 1em 1em 1em #000;
+  }
+  50% {
+		margin:1em 0.5em 0.5em 1em;
+		-moz-box-shadow: 0.2em 0.2em 0.2em #000;
+		-webkit-box-shadow: 0.2em 0.2em 0.2em #000;
+		box-shadow: 0.2em 0.2em 0.2em #000;
+  }
+}
+@-moz-keyframes push {
+	0%, 100% {
+		margin:0.5em;
+		-moz-box-shadow: 1em 1em 1em #000;
+		-webkit-box-shadow: 1em 1em 1em #000;
+		box-shadow: 1em 1em 1em #000;
+  }
+  50% {
+		margin:1em 0.5em 0.5em 1em;
+		-moz-box-shadow: 0.2em 0.2em 0.2em #000;
+		-webkit-box-shadow: 0.2em 0.2em 0.2em #000;
+		box-shadow: 0.2em 0.2em 0.2em #000;
+  }
+}
+@-o-keyframes push {
+	0%, 100% {
+		margin:0.5em;
+		-moz-box-shadow: 1em 1em 1em #000;
+		-webkit-box-shadow: 1em 1em 1em #000;
+		box-shadow: 1em 1em 1em #000;
+  }
+  50% {
+		margin:1em 0.5em 0.5em 1em;
+		-moz-box-shadow: 0.2em 0.2em 0.2em #000;
+		-webkit-box-shadow: 0.2em 0.2em 0.2em #000;
+		box-shadow: 0.2em 0.2em 0.2em #000;
+  }
+}
+@keyframes push {
+	0%, 100% {
+		margin:0.5em;
+		-moz-box-shadow: 1em 1em 1em #000;
+		-webkit-box-shadow: 1em 1em 1em #000;
+		box-shadow: 1em 1em 1em #000;
+  }
+  50% {
+		margin:1em 0.5em 0.5em 1em;
+		-moz-box-shadow: 0.2em 0.2em 0.2em #000;
+		-webkit-box-shadow: 0.2em 0.2em 0.2em #000;
+		box-shadow: 0.2em 0.2em 0.2em #000;
+  }
+}

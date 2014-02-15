@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Logical Time</title>
+  <link rel="stylesheet" href="fitch.css">
+  <link rel="stylesheet" href="fitch_left.css">
+  <link rel="stylesheet" href="fitch_right.css">
+  <script src="objects.js"></script>
+  <script src="generators.js"></script>
+  <script src="fitch.js"></script>
+
+  <link rel="icon" 
+      type="image/png" 
+      href="favicon.ico">
+</head>
+<body>
+
+	<ul id='inputs'>
+		<li class='choice' id="choice_0"></li>	
+		<li class='choice' id="choice_1"></li>	
+		<li class='choice' id="choice_2"></li>	
+	</ul>
+
+	<div id='left'>
+		<h3>THE RULES</h3>
+	  <ul id='rules'>
+	  	<li class='rule normal_rule' data-arity='2'>and<br>introduction</li>
+	  	<li class='rule normal_rule' data-arity='1'>and<br>elimination</li>
+	  	<li class='rule' id='or_introduction' data-arity='1'>or<br>introduction</li>
+	  	<li class='rule normal_rule' data-arity='3'>or<br>elimination</li>
+	  	<li class='rule normal_rule' data-arity='2'>negation<br>introduction</li>
+	  	<li class='rule normal_rule' data-arity='1'>negation<br>elimination</li>
+	  	<li class='rule normal_rule' data-arity='2'>equivalence<br>introduction</li>
+	  	<li class='rule normal_rule' data-arity='1'>equivalence<br>elimination</li>
+	  	<li class='rule normal_rule' id='implication_introduction' data-arity='2'>implication<br>introduction</li>
+	  	<li class='rule normal_rule' data-arity='2'>implication<br>elimination</li>
+		</ul>
+	</div>
+
+	<div id='middle'>
+		<h2>THE PROOF</h2>
+	  <ol id='proof'>
+	  </ol>
+  </div>
+
+  <div id='right'>
+		<h3 class='top'>WHAT YOU</h3><h3 class='bottom'>CAN DO</h3>
+	  <ul id='actions'>
+	  	<li class='action' id='assume'>assume</li><br>
+	  	<li class='action' id='reiterate' data-arity='1'>reiterate</li><br>
+	  	<li class='action' id='delete'>delete</li>
+		</ul>
+		<div id='cubes'>
+			<img class='cube' id='cube_0' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_1' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_2' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_3' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_4' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_5' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_6' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_7' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_8' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_9' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_10' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_11' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_12' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_13' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_14' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_15' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_16' src="tiny_ac_bullet.png">
+			<img class='cube' id='cube_17' src="tiny_ac_bullet.png">
+		</div>
+		<div id='triangle'>8</div>
+		<div id='pole'></div>
+	</div>
+
+	<div id='get_to_work' class='modal'>GET TO WORK</div>
+	<div id='get_vars' class='modal show'>
+		
+		<div id='gradient'></div>
+		<div class='centered_content'>
+			<h4>Please Type Three Things</h4>
+			<input type='text' class='var'>
+			<input type='text' class='var'>
+			<input type='text' class='var'>
+			<input type='submit' id='submit_vars'>
+		</div>
+	</div>
+
+	<img id='satelloon' src="satelloon.png">
+	<audio id='who_cares'>
+	  <source src="who_cares.ogg" type="audio/ogg">
+	  <source src="who_cares.mp3" type="audio/mpeg">
+  	<source src="who_cares.wav" type="audio/wav">
+	</audio>
+	
+</body>
+</html>
