@@ -4,7 +4,7 @@ function generateAndIntroduction(formulae) {
 
 function generateAndElimination(formulae) {
 	if (formulae[0] instanceof Conjunction) {
-		return [new formulae[0].left.constructor(formulae[0].left.left, formulae[0].left.right), new formulae[0].left.constructor(formulae[0].right.left, formulae[0].right.right)];
+		return [new formulae[0].left.constructor(formulae[0].left.left, formulae[0].left.right), new formulae[0].right.constructor(formulae[0].right.left, formulae[0].right.right)];
 	}
 };
 
@@ -40,7 +40,7 @@ function generateOrElimination(formulae) {
 				((formulae[1].left.inspect == disjunction[0].left.inspect) || (formulae[1].left.inspect == disjunction[0].right.inspect)) &&
 				(formulae[0].right.inspect == formulae[1].right.inspect)
 			) {
-		return [formulae[0].right.constructor(formulae[0].right.left, formulae[0].right.right)];
+		return [new formulae[0].right.constructor(formulae[0].right.left, formulae[0].right.right)];
 	}
 };
 
@@ -67,17 +67,17 @@ function generateNegationElimination(formulae) {
 	}
 };
 
-function generateImplicationIntroduction(formulae) {
-	if (Proof.assuming) {
-		var assumption = [];
-		for (var i = 0; i < formulae.length; i++) {
-			if (formulae[i].assumption) assumption.push(formulae[i]);
-			formulae.splice(i, 1);
+function generateImplicationIntroduction() {
+	if (Proof.level != 0) {
+		var consequent = Proof.formulae[Proof.formulae.length - 1];
+		for (var i = Proof.formulae.length - 2; i >= 0; i--) {
+			if (Proof.formulae[i].level < Proof.level) {
+				var antecedent = Proof.formulae[i + 1];
+				break;
+			}
 		};
-		if ((assumption.length == 1) && (assumption[0].level == formulae[0].level)) {
-			exitAssumption();
-			return [new Implication(assumption[0], formulae[0])];
-		}
+		exitAssumption();
+		return [new Implication(antecedent, consequent)];
 	}
 };
 

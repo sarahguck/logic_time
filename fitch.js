@@ -47,7 +47,6 @@ function makePremises (argument) {
 	var i = 0;
 	var num;
 	for (var propt in Proof.var_values) {
-		console.log(propt + ': ' + Proof.var_values[propt]);
 		num = Math.floor(Math.random() * 5);
 		switch(num){
 			case 0:
@@ -74,13 +73,13 @@ function makePremises (argument) {
 		i += 1;
 	};
 
-	// premises.push(new Implication(new Variable('tiger'), new Variable('cube')));
-	// premises.push(new Implication(new Variable('cube'), new Variable('golf')));
-	// premises.push(new Implication(new Variable('golf'), new Variable('cube')));
-	// premises.push(new Implication(new Variable('golf'), new Negation(new Variable('cube'))));
-	// premises.push(new Disjunction(new Variable('tiger'), new Variable('golf')));
-	// premises.push(new Negation(new Negation(new Variable('golf'))));
-	// premises.push(new Variable('golf'));
+	premises.push(new Implication(new Variable('tiger'), new Variable('cube')));
+	premises.push(new Implication(new Variable('cube'), new Variable('golf')));
+	premises.push(new Implication(new Variable('golf'), new Variable('cube')));
+	premises.push(new Implication(new Variable('golf'), new Negation(new Variable('cube'))));
+	premises.push(new Disjunction(new Variable('tiger'), new Variable('golf')));
+	premises.push(new Negation(new Negation(new Variable('golf'))));
+	premises.push(new Variable('golf'));
 
 	addLines(premises);
 };
@@ -111,6 +110,15 @@ function doShit() {
 	document.getElementById('reiterate').addEventListener('click', reiterate, false);
 	document.getElementById('delete').addEventListener('click', deleteLines, false);
 	document.getElementById('assume').addEventListener('click', assume, false);
+
+
+	initTest();
+};
+
+function initTest () {
+	setTestVars();
+	setChoices();
+	makePremises();
 };
 
 function playMessage () {
@@ -150,14 +158,14 @@ function setVars () {
 			flag = true;
 			return;
 		}
+		// remove spaces at beginnin and end of string ($.strip())
 		name = inputs[i].value.replace(/\s/g, '_').toLowerCase();
 		var_values[name] = true;
 		var_names.push(name);
 	};
 	if (hasDuplicates(var_names)) {
 		alert('Fool! You make duplicate! Now you play MY WAY!');
-		Proof.var_values = {'golf':true, 'cube':true, 'tiger':true};
-		Proof.var_names  = ['golf', 'cube', 'tiger'];
+		setTextVars();
 	} else {
 		flag ? alert('THANKS') : alert('Thanks');
 		Proof.var_values = var_values;
@@ -168,6 +176,11 @@ function setVars () {
 	assignTruths();
 	makePremises();		
 };
+
+function setTestVars() {
+	Proof.var_values = {'golf':true, 'cube':true, 'tiger':true};
+	Proof.var_names  = ['golf', 'cube', 'tiger'];
+}
 
 function hasDuplicates(array) {
   var valuesSoFar = {};
@@ -216,7 +229,7 @@ function makeAssumption (formula) {
 function exitAssumption () {
 	Proof.assuming = false;
 	Proof.level 	-= 1;
-	Proof.body = document.getElementById("proof");
+	Proof.body 		 = Proof.body.parentNode.parentNode;
 };
 
 function cubeClickHandler () {
@@ -225,7 +238,7 @@ function cubeClickHandler () {
 };
 
 function showModal (modal_id) {
-	document.getElementById(modal_id).className += "show";
+	document.getElementById(modal_id).className += " show";
 };
 
 function hideModal (e) {
@@ -243,34 +256,67 @@ function handleCheck () {
 	}
 };
 
+function getExtremum (array, operator) {
+	var extremum = array[0] || 0;
+	for (var i = 0; i < array.length; i++) {
+		if (eval(array[i] + operator + extremum)) extremum = array[i];
+	};
+	return extremum;
+}
+
 function checkArity (rule) {
 	return parseInt(rule.getAttribute('data-arity')) == Proof.checked.length;
 };
 
 function checkLevels (formulae) {
-	for (var i = 0; i < formulae.length; i++) {
-		if (formulae[i].level > Proof.level) return false;
+	// ACTUALLY sarah you need make sure they're not from a previous subproof of the same level too.
+	
+	var checked = Proof.checked.sort(function(a,b){return b-a});
+	var min 		= checked[checked.length - 1];
+	// var max 		= checked[0];
+	var max			= Proof.formulae.length - 1;
+	var level 	= Proof.level;
+
+	for (var i = max; i >= min; i--) {
+		if (Proof.formulae[i].level < level) {
+			level = Proof.formulae[i].level;
+		} if (Proof.formulae[i].level > level) {
+			for (var n = 0; n < checked.length; n++) {
+				if (checked[n] == i) {
+					return false;
+				}
+			};
+		}
 	};
+
 	return true;
 };
 
 function handleRule () {
 	var rule = this;
-	rule.className += ' push';
-	setTimeout(function(){
-		rule.className = 'rule';
-	}, 500);
+	pushButton(rule);
 	if (checkArity(rule)) {
 		var formulae = getFormulae();
 		if (checkLevels(formulae)) {
-			var new_formulae	= eval(getRuleHandler(rule)).call(rule, formulae);
-			if (new_formulae) {
-				addLines(new_formulae);
-				return;
-			}
+			generateFormulae(rule, formulae);
+			return;
 		}
 	}
 	alert('check yourself');
+};
+
+function generateFormulae (rule, formulae) {
+	var new_formulae = eval(getRuleHandler(rule)).call(rule, formulae);
+	if (new_formulae) {
+		addLines(new_formulae);
+	}
+};
+
+function pushButton (button) {
+	button.className += ' push';
+	setTimeout(function(){
+		button.className = 'rule';
+	}, 500);
 };
 
 function setRuleHandlers () {
@@ -279,7 +325,11 @@ function setRuleHandlers () {
 		rules[i].onclick = handleRule;
 	};
 
-	document.getElementById('or_introduction').onclick = showChoices;;
+	document.getElementById('or_introduction').onclick = showChoices;
+	document.getElementById('implication_introduction').onclick = function(){
+		pushButton(this);
+		generateFormulae(this);
+	}
 };
 
 function getRuleHandler(rule) {
@@ -365,12 +415,18 @@ function getFormulae () {
 
 function deleteLines () {
 	var checked = getCheckedLines();
+	var remove 	= [];
 	for (var i = 0; i < checked.length; i++) {
-		if (checked[i].checked) {
-			checked[i].checked = false; 
-			handleCheck.call(checked[i]);
-		}
 		Proof.body.removeChild(checked[i].parentNode);
+		remove.push(parseInt(checked[i].getAttribute('data-index')));
+	};
+	Proof.checked = [];
+	//deleteFormulae(remove.sort().reverse());
+};
+
+function deleteFormulae (ordered_indices) {
+	for (var i = 0; i < ordered_indices.length; i++) {
+		Proof.formulae.splice(ordered_indices[i], 1);
 	};
 };
 
@@ -382,8 +438,8 @@ function openSubProof (argument) {
 	bg.setAttribute('class', 'subproof_bg');
 	var line = document.createElement('div');
 	line.setAttribute('class', 'subproof_marker');
-	var sub_body = document.createElement('ul');
-	sub_body.setAttribute('class', 'subproof_body');
+	var sub_body = document.createElement('ol');
+	sub_body.setAttribute('class', 'subproof_body proof_body');
 
 	sub.appendChild(line);
 	sub.appendChild(bg);
