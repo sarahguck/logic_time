@@ -20,31 +20,90 @@ h3{
 #inputs{
 	position:fixed;
 	top:0;
-	left:25%;
-	width:40%;
+	left:0;
+	width:0;
 	list-style:none;
 	margin:0;
 	background:#ddd;
 	height:0;
 	overflow:hidden;
 	padding:0;
-	z-index:2;
-	background: url("dreamstime.jpg");
-	-webkit-transition:height .5s;
-  transition:height .5s;
+	z-index:3;
+	background: url("../images/dreamstime.jpg");
+	height:100%;
+	-webkit-transition:width .5s;
+  transition:width .5s;
 }
 #inputs.show{
-	height:100%;
-}
-.choice{
-	margin:0.2em auto;
-	background:#fff;
-	font-size:6em;
-	box-shadow:inset 0 0 1em 0 #000;
-	cursor:pointer;
-	padding: 0 .5em;
+	width:40em
 }
 
+/* assumption */
+#assumption{
+	min-width:10em;
+	height:3em;
+	line-height:4em;
+	border-bottom:.3em solid blue;
+	margin:3em 0 0 0;
+	font-size: 2em;
+	display:block;
+}
+#submit_assumption{
+	top: 221px;
+	left: 424px;
+}
+#abort_assumption{
+	top: 100px;
+	left: 570px;
+	width: 60px;
+	height: 60px;
+	-moz-border-radius: 60px;
+	-webkit-border-radius: 60px;
+	border-radius: 60px;
+}
+button.circle{
+	width: 30px;
+	height: 30px;
+	background: rgba(0, 0, 0, 0.4);
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	border-radius: 30px;
+	position: absolute;
+	color: #fff;
+	border:none;
+	cursor:pointer;
+}
+button.circle span{
+	display:none;
+	position:absolute;
+	top:0;
+	left:45px;
+	width:100px;
+	background:blue;
+}
+button.circle:hover span{
+	display:block;
+}
+#and_symbol{
+	top: 300px;
+	left: 205px;
+}
+#or_symbol{
+	left: 323px;
+	top: 274px;
+}
+#neg_symbol{
+	left: 508px;
+	top: 248px;
+}
+#impl_symbol{
+	top: 90px;
+	left: 69px;
+}
+#equiv_symbol{
+	top: 247px;
+	left: 36px;
+}
 
 #rules{
 	list-style:none;
@@ -59,28 +118,35 @@ h3{
 	position:absolute;
 	background:#aaa;
 	background:#1DBF00;
-	background:#ffffff url('caddy.jpg') no-repeat 0 0;
+	background:#ffffff url('../images/caddy.png') no-repeat 0 0;
 	background-size: 120% 120%;
-	color:#fff;
+	color:blue;
 	font-weight:bold;
-	width:7.5em;
-	height:2.2em;
-	margin:0.5em;
-	padding:0.5em;
-	text-align:right;
+	width:7em;
+	height: 2em;
+	margin: 0.5em;
+	padding: 2em 0.5em 0.5em 0.5em;
+	text-align:left;
 	cursor:pointer;
 	-moz-box-shadow: 1em 1em 1em #000;
 	-webkit-box-shadow: 1em 1em 1em #000;
 	box-shadow: 1em 1em 1em #000;
-	text-shadow: 0px 1px 8px rgba(0, 0, 0, 1);
+/*	text-shadow: 0px 1px 8px rgba(0, 0, 0, 1);
+*/}
+.rule span{
+	background: rgba(255, 255, 255, 0.5);
+	color:blue;
+}
+.rule:hover span{
+	color:red;	
 }
 .rule:hover{
-	margin:.6em 0.5em 0.5em .6em;
+/*	margin:.6em 0.5em 0.5em .6em;
 	-moz-box-shadow: 0.9 0.9 0.9 #000;
 	-webkit-box-shadow: 0.9 0.9 0.9 #000;
 	box-shadow: 0.9 0.9 0.9 #000;
 	-webkit-transition:margin .2s, box-shadow .2s;
-  transition:margin .2s, box-shadow .2s;
+  transition:margin .2s, box-shadow .2s;*/
 }
 #rules li:nth-child(2n + 1){
 	left:0em;
@@ -95,29 +161,37 @@ h3{
 	top:0;
 }
 #rules li:nth-child(3){
-	top:4.2em;
-}
+	top:5em;
+/*	top:4.2em;
+*/}
 #rules li:nth-child(4){
-	top:4.2em;
-}
+	top:5em;
+/*	top:4.2em;
+*/}
 #rules li:nth-child(5){
-	top:8.4em;
-}
+	top:10em;
+/*	top:8.4em;
+*/}
 #rules li:nth-child(6){
-	top:8.4em;
-}
+	top:10em;
+/*	top:8.4em;
+*/}
 #rules li:nth-child(7){
-	top:12.6em;
-}
+	top:15em;
+/*	top:12.6em;
+*/}
 #rules li:nth-child(8){
-	top:12.6em;
-}
+	top:15em;
+/*	top:12.6em;
+*/}
 #rules li:nth-child(9){
-	top:16.8em;
-}
+	top:20em;
+/*	top:16.8em;
+*/}
 #rules li:nth-child(10){
-	top:16.8em;
-}
+	top:20em;
+/*	top:16.8em;
+*/}
 
 .rule.push{
 	-webkit-animation: push .3s; /* Safari 4+ */

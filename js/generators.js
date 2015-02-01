@@ -54,6 +54,7 @@ function generateNegationIntroduction(formulae) {
 						(formulae[1].right.inspect == (new Negation(formulae[0].right)).inspect)
 					)
 		  ) {
+		// exitAssumption();
 		return [new Negation(formulae[0].left)];
 	} else {
 		return false;

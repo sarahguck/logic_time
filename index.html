@@ -2,48 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Logical Time</title>
-  <link rel="stylesheet" href="fitch.css">
-  <link rel="stylesheet" href="fitch_left.css">
-  <link rel="stylesheet" href="fitch_right.css">
-  <script src="objects.js"></script>
-  <script src="generators.js"></script>
-  <script src="fitch.js"></script>
-
-  <link rel="icon" 
-      type="image/png" 
-      href="favicon.ico">
+  <title>Fitch Fairway</title>
+  <link rel="stylesheet" href="css/fitch.css">
+  <link rel="stylesheet" href="css/fitch_left.css">
+  <link rel="stylesheet" href="css/fitch_right.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <script src="js/objects.js"></script>
+  <script src="js/generators.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/fitch.js"></script>
+  <link rel="icon" type="image/png" href="favicon.ico">
 </head>
 <body>
 
-	<ul id='inputs'>
-		<li class='choice' id="choice_0"></li>	
-		<li class='choice' id="choice_1"></li>	
-		<li class='choice' id="choice_2"></li>	
-	</ul>
+  <!-- GOLF COURSE LANDSCAPE -->
+  <div id='hills'>
+    <div class="hill"></div>
+    <div class="hill"></div>
+    <div class="hill"></div>
+    <div class="hill"></div>
+  </div>
 
+  <!-- CADDY -->
+	<div id="caddy_content">
+		<div id="beacon"></div>
+    <div id="cube_wrap">
+      <div id="cube">
+        <div class="cube_face" id="cube_front">
+          INFORMATION CUBE
+          <br><br>
+          <div class="cube_message">
+            THE MESSAGE ON THE CUBE
+          </div>
+        </div>
+        <div class="cube_face" id="cube_back">
+          INFORMATION CUBE
+          <br><br>
+          <div class="cube_message">
+            THE MESSAGE ON THE CUBE
+          </div>
+        </div>
+        <div class="cube_face" id="cube_left">
+          INFORMATION CUBE
+          <br><br>
+          <div class="cube_message">
+            THE MESSAGE ON THE CUBE
+          </div>
+        </div>
+        <div class="cube_face" id="cube_right">
+          INFORMATION CUBE
+          <br><br>
+          <div class="cube_notes">
+            <u>Email:</u> powersetminigolf@hotmail.com
+            <br><br>
+            <u>Grammar:</u>
+            I will be using the epicene pronouns "ey", "eir", and "em". (As you can see, I will also be using the Oxford comma and placing commas within quotation marks only when part of the quoted text. This information is absolutely unnecessary for game-play but I hate to miss an opportunity to expound on grammar conventions.) 
+          </div>
+        </div>
+        <div class="cube_face" id="cube_top"></div>
+        <div class="cube_face" id="cube_bottom"></div>
+      </div>
+    </div>
+		<img src="images/paul_blend.png" id="caddy_img">
+	</div>
+	<div id="caddy_mask">
+		<div id="help_target"></div>
+	</div>
+	<div id="drag_mask"></div>
+  <div id='help' class='modal'></div>
+
+  <!-- ASSUMPTION / OR INTRODUCTION INTERFACE -->
+	<div id='inputs'>
+		<h4>MAKE YOUR ASSUMPTION</h4>
+		<input type='text' id='assumption'></input><button class='circle' id="submit_assumption">OK</button>
+		<button class='circle' id="abort_assumption">ABORT</button>
+		<button class='circle insert_symbol' id="and_symbol" data-symbol='∧'>∧<span>Click to insert symbol</span></button>
+		<button class='circle insert_symbol' id="or_symbol" data-symbol='∨'>∨<span>Click to insert symbol</span></button>
+		<button class='circle insert_symbol' id="neg_symbol" data-symbol='¬'>¬<span>Click to insert symbol</span></button>
+		<button class='circle insert_symbol' id="impl_symbol" data-symbol='⇒'>⇒<span>Click to insert symbol</span></button>
+		<button class='circle insert_symbol' id="equiv_symbol" data-symbol='⇔'>⇔<span>Click to insert symbol</span></button>
+	</div>
+
+  <!-- RULES OF INFERENCE BUTTONS -->
 	<div id='left'>
 		<h3>THE RULES</h3>
 	  <ul id='rules'>
-	  	<li class='rule normal_rule' data-arity='2'>and<br>introduction</li>
-	  	<li class='rule normal_rule' data-arity='1'>and<br>elimination</li>
-	  	<li class='rule' id='or_introduction' data-arity='1'>or<br>introduction</li>
-	  	<li class='rule normal_rule' data-arity='3'>or<br>elimination</li>
-	  	<li class='rule normal_rule' data-arity='2'>negation<br>introduction</li>
-	  	<li class='rule normal_rule' data-arity='1'>negation<br>elimination</li>
-	  	<li class='rule normal_rule' data-arity='2'>equivalence<br>introduction</li>
-	  	<li class='rule normal_rule' data-arity='1'>equivalence<br>elimination</li>
-	  	<li class='rule' id='implication_introduction'>implication<br>introduction</li>
-	  	<li class='rule normal_rule' data-arity='2'>implication<br>elimination</li>
+	  	<li class='rule normal_rule' data-arity='2'><span>and<br>introduction</span></li>
+	  	<li class='rule normal_rule' data-arity='1'><span>and<br>elimination</span></li>
+	  	<li class='rule' id='or_introduction' data-arity='1'><span>or<br>introduction</span></li>
+	  	<li class='rule normal_rule' data-arity='3'><span>or<br>elimination</span></li>
+	  	<li class='rule normal_rule' data-arity='2'><span>negation<br>introduction</span></li>
+	  	<li class='rule normal_rule' data-arity='1'><span>negation<br>elimination</span></li>
+	  	<li class='rule normal_rule' data-arity='2'><span>equivalence<br>introduction</span></li>
+	  	<li class='rule normal_rule' data-arity='1'><span>equivalence<br>elimination</span></li>
+	  	<li class='rule' id='implication_introduction'><span>implication<br>introduction</span></li>
+	  	<li class='rule normal_rule' data-arity='2'><span>implication<br>elimination</span></li>
 		</ul>
 	</div>
 
+  <!-- PROOF -->
 	<div id='middle'>
+		<h1>WELCOME TO FITCH FAIRWAY</h1>
 		<h2>THE PROOF</h2>
-	  <ol id='proof' class='proof_body'>
+	  <ol id='proof' class='proof_body level_0'>
 	  </ol>
+	  <div id="conclusion_container">
+			<span id='prove_it'>&#8630; PROVE IT</span>
+	  </div>
   </div>
 
+  <!-- RIGHT SIDE INTERACTIONS -->
   <div id='right'>
 		<h3 class='top'>WHAT YOU</h3><h3 class='bottom'>CAN DO</h3>
 	  <ul id='actions'>
@@ -52,47 +120,52 @@
 	  	<li class='action' id='delete'>delete</li>
 		</ul>
 		<div id='cubes'>
-			<img class='cube' id='cube_0' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_1' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_2' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_3' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_4' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_5' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_6' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_7' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_8' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_9' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_10' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_11' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_12' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_13' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_14' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_15' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_16' src="tiny_ac_bullet.png">
-			<img class='cube' id='cube_17' src="tiny_ac_bullet.png">
+      <h3>HELPERS</h3>
+			<img class='cube' id='cube_0' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_1' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_2' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_3' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_4' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_5' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_6' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_7' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_8' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_9' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_10' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_11' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_12' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_13' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_14' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_15' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_16' src="images/tiny_ac_bullet.png">
+			<img class='cube' id='cube_17' src="images/tiny_ac_bullet.png">
 		</div>
-		<div id='triangle'>8</div>
-		<div id='pole'></div>
 	</div>
+	<div id='get_to_work' class='modal click_to_close'>GET TO WORK</div>
 
-	<div id='get_to_work' class='modal'>GET TO WORK</div>
-	<div id='get_vars' class='modal'>
-		
+  <!-- INTRO SCREEN -->
+	<div id='get_vars' class='modal show'>
 		<div id='gradient'></div>
-		<div class='centered_content'>
-			<h4>Please Type Three Things</h4>
-			<input type='text' class='var'>
-			<input type='text' class='var'>
-			<input type='text' class='var'>
-			<input type='submit' id='submit_vars'>
+		<div id='intro'>
+      <h3>Welcome to Fitch Fairway.</h3>
+			<h4>Please type 3 words<br>using only a-z<br><!-- Please --></h4>
+      <div id="var_inputs">
+        <div id="var_inputs_bg"></div>
+  			<input maxlength='10' type='text' class='var_input'>
+  			<input maxlength='10' type='text' class='var_input'>
+  			<input maxlength='10' type='text' class='var_input'>
+  			<input type='submit' id='submit_vars'>
+      </div>
+      <h3></h3>
 		</div>
 	</div>
 
-	<img id='satelloon' src="satelloon.png">
+  <!-- NASA SATELLOON -->
+	<img id='satelloon' src="images/satelloon.png">
 	<audio id='who_cares'>
-	  <source src="who_cares.ogg" type="audio/ogg">
-	  <source src="who_cares.mp3" type="audio/mpeg">
-  	<source src="who_cares.wav" type="audio/wav">
+	  <source src="sounds/who_cares.ogg" type="audio/ogg">
+	  <source src="sounds/who_cares.mp3" type="audio/mpeg">
+  	<source src="sounds/who_cares.wav" type="audio/wav">
 	</audio>
 	
 </body>

@@ -17,8 +17,9 @@ function Conjunction (left, right) {
 	this.eliminate = function(){
 		return [this.left, this.right];
 	}
-	this.level = Proof.level;
-	this.assumption = Proof.assuming && Proof.assumption.step_num == 0;
+	this.level      = Proof.level;
+	this.assumption = isAssumption();
+  this.premise    = false;
 };
 
 function Disjunction (left, right) {
@@ -29,8 +30,9 @@ function Disjunction (left, right) {
 	this.eliminate = function(){
 		return [this.left, this.right];
 	}
-	this.level = Proof.level;
-	this.assumption = Proof.assuming && Proof.assumption.step_num == 0;
+	this.level      = Proof.level;
+	this.assumption = isAssumption();
+  this.premise    = false;
 };
 
 function Negation (left) {
@@ -38,11 +40,9 @@ function Negation (left) {
 	this.right	= left;
 	this.inspect 	 = '¬' + this.left.groupedInspect;
 	this.groupedInspect = this.inspect;
-	this.eliminate = function(){
-		return [left, right];
-	}
-	this.level = Proof.level;
-	this.assumption = Proof.assuming && Proof.assumption.step_num == 0;
+	this.level      = Proof.level;
+	this.assumption = isAssumption();
+  this.premise    = false;
 };
 
 function Implication (left, right) {
@@ -50,8 +50,9 @@ function Implication (left, right) {
 	this.right = right;
 	this.inspect 		= this.left.groupedInspect + ' ⇒ ' + this.right.groupedInspect;
 	this.groupedInspect = '(' + this.inspect + ')';
-	this.level = Proof.level;
-	this.assumption = Proof.assuming && Proof.assumption.step_num == 0;
+	this.level      = Proof.level;
+	this.assumption = isAssumption();
+  this.premise    = false;
 };
 
 function Equivalence (left, right) {
@@ -59,8 +60,9 @@ function Equivalence (left, right) {
 	this.right = right;
 	this.inspect = this.left.groupedInspect + ' ⇔ ' + this.right.groupedInspect;
 	this.groupedInspect = '(' + this.inspect + ')';
-	this.level = Proof.level;
-	this.assumption = Proof.assuming && Proof.assumption.step_num == 0;
+	this.level      = Proof.level;
+	this.assumption = isAssumption();
+  this.premise    = false;
 };
 
 function Variable (left, right) {
@@ -68,6 +70,15 @@ function Variable (left, right) {
 	this.right	 = left;
 	this.inspect = left;
 	this.groupedInspect = this.inspect;
-	this.level = Proof.level;
-	this.assumption = Proof.assuming && Proof.assumption.step_num == 0;
+	this.level      = Proof.level;
+  this.assumption = isAssumption();
+  this.premise    = false;
+}
+
+function isAssumption(){
+  return Proof.inSubProof() && Proof.assumption.step_num == 0;
+}
+
+function isPremise(){
+  return Proof.adding_premises;
 }
